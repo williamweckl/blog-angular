@@ -1,0 +1,28 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development_and_test: &development_and_test
+  host: localhost
+  port: 5432
+  user: postgres
+  password:
+
+development:
+  <<: *default
+  <<: *development_and_test
+  database: blog_angular_development
+
+test:
+  <<: *default
+  <<: *development_and_test
+  database: blog_angular_test
+
+production:
+  <<: *default
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
