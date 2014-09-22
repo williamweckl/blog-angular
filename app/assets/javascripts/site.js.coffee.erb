@@ -1,0 +1,24 @@
+#= require_self
+#= require_tree ./services/global
+#= require_tree ./services/site
+#= require_tree ./filters/global
+#= require_tree ./filters/site
+#= require_tree ./controllers/global
+#= require_tree ./controllers/site
+#= require_tree ./directives/global
+#= require_tree ./directives/site
+
+# Creates new Angular module called 'Blog'
+Blog = angular.module('Blog', [
+  'ngRoute',
+])
+
+# Sets up routing
+Blog.config(['$routeProvider', ($routeProvider)->
+  # Route for '/post'
+  $routeProvider.when('/post', { templateUrl: '../assets/sitePost.html', controller: 'PostCtrl' } )
+
+  # Default
+  $routeProvider.otherwise({ templateUrl: '<%= asset_path('templates/siteIndex.html') %>', controller: 'IndexCtrl' } )
+
+])
